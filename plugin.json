@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "voice-kit",
+  "version": "0.1.0",
+  "description": "Build a voice guide from what you have already typed to your AI tools, then draft posts and messages that sound like you.",
+  "author": { "name": "b1rdmania", "url": "https://github.com/b1rdmania" },
+  "repository": "https://github.com/b1rdmania/voice-kit",
+  "license": "MIT",
+  "keywords": ["writing", "voice", "social media", "linkedin", "x", "ai slop"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "voice-kit",
+        "shortDescription": "Write posts that sound like you",
+        "developerName": "b1rdmania",
+        "category": "Productivity"
+      }
+    }
+  }
+}

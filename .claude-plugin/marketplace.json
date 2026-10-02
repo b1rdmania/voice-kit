@@ -1,0 +1,8 @@
+{
+  "name": "voice-kit",
+  "description": "Write posts and messages that sound like you.",
+  "owner": { "name": "b1rdmania" },
+  "plugins": [
+    { "name": "voice-kit", "source": "./", "description": "Build a voice guide from your AI history, then draft in your voice." }
+  ]
+}
