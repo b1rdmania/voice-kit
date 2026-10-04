@@ -8,12 +8,16 @@ Ask which they use, then run `scripts/extract.py` once per source. Every run app
 
 | Source | Command |
 | --- | --- |
-| Claude Code | `python3 scripts/extract.py --source claude-code --out ~/voice/corpus.jsonl` |
-| Codex | `python3 scripts/extract.py --source codex --out ~/voice/corpus.jsonl` |
-| ChatGPT export | `python3 scripts/extract.py --source chatgpt --path <conversations.json> --out ~/voice/corpus.jsonl` |
-| Posts or emails they paste or point to | `python3 scripts/extract.py --source samples --path <file> --out ~/voice/corpus.jsonl` |
+| Claude Code | `python3 scripts/extract.py --source claude-code --names ~/voice/names.txt --out ~/voice/corpus.jsonl` |
+| Codex | `python3 scripts/extract.py --source codex --names ~/voice/names.txt --out ~/voice/corpus.jsonl` |
+| ChatGPT export | `python3 scripts/extract.py --source chatgpt --path <conversations.json> --names ~/voice/names.txt --out ~/voice/corpus.jsonl` |
+| Posts or emails they paste or point to | `python3 scripts/extract.py --source samples --path <file> --names ~/voice/names.txt --out ~/voice/corpus.jsonl` |
 
-If the host cannot run scripts, ask the person to paste 30 to 50 of their own messages or posts, and work from those.
+Before the real run, find names to hide. Run the first source with `--suggest-names` added. It prints capitalised words that appear often, most of them people, places or companies. Show the list to the person. Write the ones they want hidden, usually friends, family and colleagues, to `~/voice/names.txt`, one per line. Add `--names ~/voice/names.txt` to every extract run.
+
+The script also drops whole messages about health, money, legal or ID matters. Leave that on unless the person asks to keep them with `--keep-sensitive`.
+
+If the host cannot run scripts, ask the person to paste 30 to 50 of their own messages or posts, and work from those. Tell them to remove names and private details first.
 
 Aim for 20,000 words or more. Under 5,000 words, say the guide will be thin and ask for more samples.
 

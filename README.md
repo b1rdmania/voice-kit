@@ -53,7 +53,14 @@ codex plugin marketplace add b1rdmania/voice-kit
 
 ## Privacy
 
-Everything stays on your machine, in `~/voice/`. The extract script keeps only your own messages, drops pastes and tool output, and removes emails, phone numbers and API keys. Your AI host reads the corpus to analyse it, under that host's own privacy terms. Never commit `~/voice/`.
+Everything stays on your machine, in `~/voice/`. Before anything is analysed, the extract script:
+
+- keeps only your own messages, and drops pastes and tool output
+- drops whole messages about health, money, legal or ID matters
+- replaces secrets, emails, URLs, handles, phone numbers, card and bank numbers, ID numbers, postcodes, street addresses, IP addresses and usernames in file paths with labels such as `[email]`
+- replaces the names you choose with `[name]`, after showing you a list of likely names to review
+
+Your AI host reads the cleaned corpus to analyse it, under that host's own privacy terms. Never commit `~/voice/`.
 
 ## Works with plain-english
 
