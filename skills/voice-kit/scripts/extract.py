@@ -67,7 +67,7 @@ SENSITIVE = re.compile(
 
 
 def load_names(path):
-    if not path:
+    if not path or not os.path.exists(os.path.expanduser(path)):
         return None
     names = [n.strip() for n in open(os.path.expanduser(path)) if n.strip() and not n.startswith("#")]
     if not names:
