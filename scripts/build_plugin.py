@@ -6,7 +6,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 ROOT = Path(__file__).resolve().parents[1]
 FILES = (
-    'plugin.json', 'README.md', 'LICENSE', 'CHANGELOG.md', 'PRIVACY.md',
+    '.codex-plugin/plugin.json', 'README.md', 'LICENSE', 'CHANGELOG.md', 'PRIVACY.md',
     'assets/icon.svg', 'examples/guide-example.md',
     'skills/voice-kit/SKILL.md',
     'skills/voice-kit/prompts/analysis.md',
@@ -27,6 +27,12 @@ FILES = (
 
 def main():
     manifest = json.loads((ROOT / 'plugin.json').read_text())
+    compatibility = {key: value for key, value in manifest.items() if key not in ('$schema', 'extensions')}
+    compatibility['skills'] = './skills/'
+    compatibility['interface'] = manifest['extensions']['com.openai']['interface']
+    compatibility_dir = ROOT / '.codex-plugin'
+    compatibility_dir.mkdir(exist_ok=True)
+    (compatibility_dir / 'plugin.json').write_text(json.dumps(compatibility, indent=2) + '\n')
     for name in FILES:
         path = ROOT / name
         if not path.is_file() or path.is_symlink() or not path.resolve().is_relative_to(ROOT):

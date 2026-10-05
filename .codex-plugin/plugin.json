@@ -1,0 +1,44 @@
+{
+  "name": "voice-kit",
+  "version": "0.1.5",
+  "description": "A writing and editing assistant for posts, emails and messages. Build a reusable voice guide from your own writing, then edit in plain English while keeping your style.",
+  "author": {
+    "name": "b1rdmania",
+    "url": "https://github.com/b1rdmania"
+  },
+  "repository": "https://github.com/b1rdmania/voice-kit",
+  "license": "MIT",
+  "keywords": [
+    "writing assistant",
+    "plain English",
+    "human-led writing",
+    "personal voice",
+    "writing style",
+    "voice guide",
+    "editing",
+    "email writing",
+    "LinkedIn posts",
+    "social media writing"
+  ],
+  "homepage": "https://github.com/b1rdmania/voice-kit",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Voice Kit",
+    "shortDescription": "Write and edit in your voice",
+    "developerName": "b1rdmania",
+    "category": "Productivity",
+    "longDescription": "Voice Kit helps you write and edit posts, emails and messages in your own style. Bring your notes or a draft, and get clear, plain-English text that follows your preferences. You choose the final words.\n\nBuild an editable voice guide from writing samples and corrections you have given AI. Reuse it for LinkedIn posts, email replies and everyday messages.\n\nSupply selected samples or an export, or use accessible local AI history. Save your guide for later chats. Redaction is best effort; your AI provider processes the material you supply. Voice Kit cannot automatically read past chats.",
+    "defaultPrompt": [
+      "Learn my writing style from these samples.",
+      "Edit this in plain English while keeping my voice.",
+      "Use my voice guide to draft a LinkedIn post from these notes."
+    ],
+    "logo": "./assets/icon.svg",
+    "composerIcon": "./assets/icon.svg",
+    "privacyPolicyURL": "https://gist.github.com/b1rdmania/8b4e9569e08e7c3b23e8e4f9a7ee53bc",
+    "capabilities": [
+      "Write"
+    ],
+    "websiteURL": "https://github.com/b1rdmania/voice-kit"
+  }
+}

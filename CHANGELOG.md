@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.5 (2026-10-05)
+
+- Build the submission ZIP in Codex manifest format, matching the published Plain English package.
+- Keep the same Productivity category and writing metadata to isolate the category import warning.
+
 ## 0.1.4 (2026-10-05)
 
 - Use the Write capability label shared with the published Plain English plugin.
