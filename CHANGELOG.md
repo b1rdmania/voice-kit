@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4 (2026-10-05)
+
+- Use the Write capability label shared with the published Plain English plugin.
+- Add the public project website and make writing and editing explicit in the subtitle.
+
 ## 0.1.3 (2026-10-05)
 
 - Public privacy policy linked in the listing and included in the package.
