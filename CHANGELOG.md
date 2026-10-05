@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Stronger anonymiser: drops messages about health, money, legal or ID matters; redacts secrets, tokens, URLs, handles, card, bank and ID numbers, postcodes, street addresses, IPs and path usernames; `--names` and `--suggest-names` for people's names.
+- Stronger anonymiser: drops messages about health, money, legal or ID matters; redacts secrets, tokens, URLs, handles, card, bank and ID numbers, postcodes, street addresses, IPs and path usernames; names of people, places and companies hidden automatically. No flags and no review step.
 
 ## 0.1.0 (2026-10-02)
 

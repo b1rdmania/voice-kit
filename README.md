@@ -58,7 +58,9 @@ Everything stays on your machine, in `~/voice/`. Before anything is analysed, th
 - keeps only your own messages, and drops pastes and tool output
 - drops whole messages about health, money, legal or ID matters
 - replaces secrets, emails, URLs, handles, phone numbers, card and bank numbers, ID numbers, postcodes, street addresses, IP addresses and usernames in file paths with labels such as `[email]`
-- replaces the names you choose with `[name]`, after showing you a list of likely names to review
+- replaces names of people, places and companies with `[name]`, automatically
+
+You do not need to review anything. The guide is built from how you write, not who you write about.
 
 Your AI host reads the cleaned corpus to analyse it, under that host's own privacy terms. Never commit `~/voice/`.
 

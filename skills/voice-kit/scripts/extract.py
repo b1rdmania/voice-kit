@@ -14,11 +14,13 @@ Sources:
   samples      a text file, one message or post per blank-line-separated block
 
 Keeps only the person's own messages. Drops tool output, system text, pastes
-(messages over --max-chars) and duplicates. Drops whole messages that mention
+(messages over 2,500 characters) and duplicates. Drops whole messages that mention
 health, money, legal or ID matters. Redacts secrets, emails, URLs, handles,
 phone numbers, card and bank numbers, ID numbers, postcodes, street addresses,
-IP addresses and usernames in file paths. Names from --names become [name];
---suggest-names lists likely names to review first. Writes one JSON object per line: {"t": date, "source": ..., "text": ...}.
+IP addresses and usernames in file paths. Replaces every capitalised word used
+mid-sentence anywhere in the corpus, wherever it appears, with [name]: people,
+places and companies all go. Voice lives in structure, not names.
+Writes one JSON object per line: {"t": date, "source": ..., "text": ...}.
 
 The corpus is private. Keep it in ~/voice/ and never commit or share it.
 """
@@ -30,6 +32,7 @@ import os
 import re
 import sys
 
+MAX_CHARS = 2500  # longer messages are almost always pastes
 SKIP_PREFIXES = ("<", "Base directory for this skill", "[Request interrupted",
                  "Caveat:", "This session is being continued", "[SYSTEM")
 REDACT = [
@@ -66,40 +69,42 @@ SENSITIVE = re.compile(
     r"national insurance|social security|nhs number)\b")
 
 
-def load_names(path):
-    if not path or not os.path.exists(os.path.expanduser(path)):
-        return None
-    names = [n.strip() for n in open(os.path.expanduser(path)) if n.strip() and not n.startswith("#")]
-    if not names:
-        return None
-    return re.compile(r"\b(" + "|".join(re.escape(n) for n in sorted(names, key=len, reverse=True)) + r")\b", re.I)
+COMMON = {"I", "I'm", "I've", "I'll", "I'd", "Monday", "Tuesday", "Wednesday", "Thursday",
+          "Friday", "Saturday", "Sunday", "January", "February", "March", "April", "May",
+          "June", "July", "August", "September", "October", "November", "December",
+          "English", "British", "American", "European"}
+MID_SENTENCE_CAP = re.compile(r"(?<=[a-z0-9,;:)] )([A-Z][a-z]+(?:'s)?)\b")
 
 
-def clean(text, names=None):
+def clean(text):
     text = re.sub(r"<system-reminder>.*?</system-reminder>", "", text, flags=re.S)
     text = re.sub(r"<pasted_content[^>]*>.*?</pasted_content[^>]*>", "[paste]", text, flags=re.S)
     text = text.strip()
     for pattern, label in REDACT:
         text = pattern.sub(label, text)
-    if names:
-        text = names.sub("[name]", text)
     return text
 
 
-def suggest_names(rows, top=60):
-    """Capitalised words that appear mid-sentence often: likely names to review."""
+def find_names(rows):
+    """Every capitalised word used mid-sentence: people, places, companies."""
     import collections
-    common = {"I", "I'm", "I've", "I'll", "I'd", "OK", "AI", "API", "UK", "US", "EU", "CEO", "CTO",
-              "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",
-              "January", "February", "March", "April", "May", "June", "July", "August",
-              "September", "October", "November", "December", "Claude", "Codex", "ChatGPT",
-              "GitHub", "LinkedIn", "Google", "London", "English"}
-    counts = collections.Counter()
+    capital, lower = collections.Counter(), collections.Counter()
     for r in rows:
-        for m in re.finditer(r"(?<=[a-z,;] )([A-Z][a-z]{2,})\b", r["text"]):
-            if m.group(1) not in common:
-                counts[m.group(1)] += 1
-    return [w for w, c in counts.most_common(top) if c >= 3]
+        lower.update(re.findall(r"\b[a-z]+\b", r["text"]))
+        for m in MID_SENTENCE_CAP.finditer(r["text"]):
+            capital[m.group(1).removesuffix("'s")] += 1
+    # A word written in lowercase at least twice as often is an ordinary word
+    # ("Note: The plan" must not hide every "The").
+    return {w for w, c in capital.items()
+            if w not in COMMON and lower[w.lower()] < 2 * c}
+
+
+def hide_names(rows, names):
+    if not names:
+        return
+    pattern = re.compile(r"\b(" + "|".join(re.escape(n) for n in sorted(names, key=len, reverse=True)) + r")\b")
+    for r in rows:
+        r["text"] = pattern.sub("[name]", r["text"])
 
 
 def text_of(content, kinds=("text", "input_text")):
@@ -165,26 +170,19 @@ def main():
     ap.add_argument("--source", required=True, choices=SOURCES)
     ap.add_argument("--path", help="file for chatgpt or samples")
     ap.add_argument("--since", default="")
-    ap.add_argument("--max-chars", type=int, default=2500)
-    ap.add_argument("--names", help="file of names to replace with [name], one per line")
-    ap.add_argument("--suggest-names", action="store_true",
-                    help="print likely names to review for --names, and write nothing")
-    ap.add_argument("--keep-sensitive", action="store_true",
-                    help="keep messages about health, money, legal or ID matters (dropped by default)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
-    names = load_names(a.names)
     if a.source in ("chatgpt", "samples") and not a.path:
         sys.exit(f"--source {a.source} needs --path")
 
     seen, rows, dropped = set(), [], 0
     for date, raw in SOURCES[a.source](a.path):
         raw = raw or ""
-        if not a.keep_sensitive and SENSITIVE.search(raw):
+        if SENSITIVE.search(raw):
             dropped += 1
             continue
-        text = clean(raw, names)
-        if len(text) < 12 or len(text) > a.max_chars or text.startswith(SKIP_PREFIXES):
+        text = clean(raw)
+        if len(text) < 12 or len(text) > MAX_CHARS or text.startswith(SKIP_PREFIXES):
             continue
         if a.since and date and date < a.since:
             continue
@@ -195,10 +193,7 @@ def main():
         rows.append({"t": date, "source": a.source, "text": text})
 
     rows.sort(key=lambda r: r["t"])
-    if a.suggest_names:
-        print("Likely names. Copy the real ones into a names file, then rerun with --names:")
-        print("\n".join(suggest_names(rows)))
-        return
+    hide_names(rows, find_names(rows))
     out = os.path.expanduser(a.out)
     os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
     mode = "a" if os.path.exists(out) else "w"
