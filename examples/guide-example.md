@@ -1,4 +1,4 @@
-# Voice guide: @tillyships (made-up example)
+# Voice guide: @tilly_example (made-up example)
 
 *Built 2026-10-02 from 2,140 messages (Claude Code, ChatGPT export), 96,000 words, plus 4 approved examples. Tilly is not a real person.*
 
