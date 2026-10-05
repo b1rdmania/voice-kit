@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6 (2026-10-05)
+
+- Classify drafting posts, emails and messages under the supported Communication category.
+
 ## 0.1.5 (2026-10-05)
 
 - Build the submission ZIP in Codex manifest format, matching the published Plain English package.

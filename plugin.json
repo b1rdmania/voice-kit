@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "voice-kit",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A writing and editing assistant for posts, emails and messages. Build a reusable voice guide from your own writing, then edit in plain English while keeping your style.",
   "author": {
     "name": "b1rdmania",
@@ -27,7 +27,7 @@
         "displayName": "Voice Kit",
         "shortDescription": "Write and edit in your voice",
         "developerName": "b1rdmania",
-        "category": "Productivity",
+        "category": "Communication",
         "longDescription": "Voice Kit helps you write and edit posts, emails and messages in your own style. Bring your notes or a draft, and get clear, plain-English text that follows your preferences. You choose the final words.\n\nBuild an editable voice guide from writing samples and corrections you have given AI. Reuse it for LinkedIn posts, email replies and everyday messages.\n\nSupply selected samples or an export, or use accessible local AI history. Save your guide for later chats. Redaction is best effort; your AI provider processes the material you supply. Voice Kit cannot automatically read past chats.",
         "defaultPrompt": [
           "Learn my writing style from these samples.",
