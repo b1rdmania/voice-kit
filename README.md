@@ -23,7 +23,7 @@ flowchart LR
 | Ask | Output |
 | --- | --- |
 | "Build my voice" | A voice guide: your registers, how your posts sound, your humour, rules you have stated, and tendencies from one-off edits |
-| "Write an X post about this" | A draft that keeps your words, cut to half the length, checked against your bans |
+| "Write an X post about this" | A draft that keeps your words, matched to your preferred length, checked against your bans |
 | "Message my friend about tonight" | A short message in the way you actually text |
 | "Refresh my voice" | The guide updated with what you have written since the last build |
 
@@ -42,6 +42,12 @@ Codex CLI, then install from the plugin browser:
 codex plugin marketplace add b1rdmania/voice-kit
 ```
 
+## ChatGPT and web use
+
+Supply a ChatGPT export, pasted writing samples, or an existing voice guide. The plugin cannot automatically access your past chats or files on your computer. With file tools, it returns a downloadable `guide.md`; otherwise it gives you copyable Markdown. Save the guide and provide it in later chats, with any approved drafts you want it to use. Hosted session storage may not persist.
+
+For local Codex or Claude Code use, the chosen history is extracted on your machine and the guide defaults to `~/voice/`.
+
 ## Sources
 
 | Source | Where it reads |
@@ -53,7 +59,7 @@ codex plugin marketplace add b1rdmania/voice-kit
 
 ## Privacy
 
-**Local extraction and storage.** The extract script runs on your machine and writes to `~/voice/`. Nothing is uploaded by voice-kit itself.
+**Storage depends on the host.** Local execution writes to `~/voice/`. Web use processes files you upload in the host’s session storage. Uploading an export already shares it with that provider before redaction. The scripts do not send files to any service.
 
 **Best-effort redaction.** Before analysis, the script:
 
@@ -81,3 +87,7 @@ If the [plain-english](https://github.com/b1rdmania/claude-plain-english-skill) 
 ## Licence
 
 MIT
+
+## Build a submission ZIP
+
+Run `python3 scripts/build_plugin.py`. The allowlisted archive contains the plugin, bundled skill, icon and public documentation. It excludes Git history, local data and build tooling.

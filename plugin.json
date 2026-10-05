@@ -1,19 +1,37 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "voice-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Build a voice guide from what you have already typed to your AI tools, then draft posts and messages that sound like you.",
-  "author": { "name": "b1rdmania", "url": "https://github.com/b1rdmania" },
+  "author": {
+    "name": "b1rdmania",
+    "url": "https://github.com/b1rdmania"
+  },
   "repository": "https://github.com/b1rdmania/voice-kit",
   "license": "MIT",
-  "keywords": ["writing", "voice", "social media", "linkedin", "x", "ai slop"],
+  "keywords": [
+    "writing",
+    "voice",
+    "social media",
+    "linkedin",
+    "x",
+    "ai slop"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "voice-kit",
-        "shortDescription": "Write posts that sound like you",
+        "shortDescription": "Write in your own voice",
         "developerName": "b1rdmania",
-        "category": "Productivity"
+        "category": "Productivity",
+        "longDescription": "Build an editable voice guide from your own writing and corrections, then draft posts, emails and messages in your style. Use local AI history where accessible, or supply an export or samples in web chat. Save and reuse your guide across chats. Redaction is best effort; the selected AI provider processes your material. No automatic access to past chats.",
+        "defaultPrompt": [
+          "Build my voice guide from these writing samples.",
+          "Use my voice guide to draft a post about this.",
+          "Refresh my voice guide with these new examples."
+        ],
+        "logo": "./assets/icon.svg",
+        "composerIcon": "./assets/icon.svg"
       }
     }
   }

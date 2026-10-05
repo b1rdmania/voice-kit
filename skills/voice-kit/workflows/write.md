@@ -6,7 +6,7 @@ Draft a post or message in the person's voice. Render their words. Do not write 
 
 ## Read first
 
-- **A post:** `~/voice/guide.md`, the matching file in `templates/formats/`, and the two FINAL drafts in `~/voice/drafts/` closest to the format.
+- **A post:** `<voice-dir>/guide.md`, the matching file in `templates/formats/`, and the two FINAL drafts in `<voice-dir>/drafts/` closest to the format.
 - **A message to a friend:** the guide's "Messages to friends" and "Hard bans" sections, and `templates/formats/dm.md`.
 
 ## Draft
@@ -26,4 +26,6 @@ Draft a post or message in the person's voice. Render their words. Do not write 
 
 ## Output
 
-Show the draft clean, with at most one variant. Save it to `~/voice/drafts/<format>/<date>-<topic>.md`. When the person approves a version, mark it FINAL. FINAL drafts are the best training data.
+Show the draft clean, with at most one variant. Save it to `<voice-dir>/drafts/<format>/<date>-<topic>.md`. When the person approves a version, mark it FINAL. FINAL drafts are the best training data.
+
+Use supplied guides and approved examples when files are unavailable. In hosted chat, deliver drafts inline and offer downloadable approved examples when file tools exist; do not claim to save files without tools. Follow `references/storage.md` for reuse in a later chat.

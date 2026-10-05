@@ -2,3 +2,4 @@
 voice/
 *.jsonl
 __pycache__/
+dist/
