@@ -1,12 +1,16 @@
-# voice-kit
+# Voice Kit
 
-Write posts and messages that sound like you. A skill for Claude, ChatGPT and Codex.
+**Human-led writing, your voice.**
 
-## The problem
+You bring the ideas. Voice Kit helps you put them into words that sound like you.
 
-AI drafts sound like AI. Voice prompts and questionnaires don't fix it, because people can't describe their own voice.
+Build a reusable voice guide from your own writing and the feedback you have given AI. Draft posts, emails and messages with plain-English editing that respects your style. Your preferences lead; you choose the final words.
 
-But you have already shown it. Every time you told an AI "too long", "that's slop" or "I'd never say that", you wrote down a rule. voice-kit reads those messages and builds your voice guide from them.
+A writing skill for ChatGPT, Codex and Claude.
+
+## It learns from your corrections
+
+“Too long.” “Less formal.” “I would never say that.” Your corrections show how you want to write. Voice Kit uses them alongside your writing samples to build a guide you can read, edit and reuse.
 
 ## What it does
 

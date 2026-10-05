@@ -1,8 +1,14 @@
 {
   "name": "voice-kit",
-  "description": "Write posts and messages that sound like you.",
-  "owner": { "name": "b1rdmania" },
+  "description": "Human-led writing in your own voice.",
+  "owner": {
+    "name": "b1rdmania"
+  },
   "plugins": [
-    { "name": "voice-kit", "source": "./", "description": "Build a voice guide from your AI history, then draft in your voice." }
+    {
+      "name": "voice-kit",
+      "source": "./",
+      "description": "Human-led writing in your own voice. Turn your writing and feedback into a reusable voice guide for clear posts, emails and messages."
+    }
   ]
 }

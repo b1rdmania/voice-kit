@@ -1,7 +1,7 @@
 {
   "name": "voice-kit",
-  "version": "0.1.1",
-  "description": "Build a voice guide from what you have already typed to your AI tools, then draft posts and messages that sound like you.",
+  "version": "0.1.2",
+  "description": "Human-led writing in your own voice. Turn your writing and feedback into a reusable voice guide for clear posts, emails and messages.",
   "author": {
     "name": "b1rdmania",
     "url": "https://github.com/b1rdmania"

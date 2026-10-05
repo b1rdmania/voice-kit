@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "voice-kit",
-  "version": "0.1.1",
-  "description": "Build a voice guide from what you have already typed to your AI tools, then draft posts and messages that sound like you.",
+  "version": "0.1.2",
+  "description": "Human-led writing in your own voice. Turn your writing and feedback into a reusable voice guide for clear posts, emails and messages.",
   "author": {
     "name": "b1rdmania",
     "url": "https://github.com/b1rdmania"
@@ -10,25 +10,29 @@
   "repository": "https://github.com/b1rdmania/voice-kit",
   "license": "MIT",
   "keywords": [
-    "writing",
-    "voice",
-    "social media",
-    "linkedin",
-    "x",
-    "ai slop"
+    "writing assistant",
+    "plain English",
+    "human-led writing",
+    "personal voice",
+    "writing style",
+    "voice guide",
+    "editing",
+    "email writing",
+    "LinkedIn posts",
+    "social media writing"
   ],
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "voice-kit",
-        "shortDescription": "Write in your own voice",
+        "displayName": "Voice Kit",
+        "shortDescription": "Human-led writing, your voice",
         "developerName": "b1rdmania",
         "category": "Productivity",
-        "longDescription": "Build an editable voice guide from your own writing and corrections, then draft posts, emails and messages in your style. Use local AI history where accessible, or supply an export or samples in web chat. Save and reuse your guide across chats. Redaction is best effort; the selected AI provider processes your material. No automatic access to past chats.",
+        "longDescription": "You bring the ideas. Voice Kit helps you put them into words that sound like you.\n\nBuild a reusable voice guide from your writing and the feedback you have given AI. Draft LinkedIn posts, emails and messages with plain-English editing that respects your style. Your preferences lead; you choose the final words.\n\nStart with writing samples, an uploaded export or accessible local AI history. Save your guide to use again. Redaction is best effort, and your AI provider processes the material you supply. The plugin cannot automatically read past chats.",
         "defaultPrompt": [
-          "Build my voice guide from these writing samples.",
-          "Use my voice guide to draft a post about this.",
-          "Refresh my voice guide with these new examples."
+          "Learn my writing style from these samples.",
+          "Edit this in plain English while keeping my voice.",
+          "Use my voice guide to draft a LinkedIn post from these notes."
         ],
         "logo": "./assets/icon.svg",
         "composerIcon": "./assets/icon.svg"

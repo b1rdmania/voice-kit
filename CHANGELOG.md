@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 (2026-10-05)
+
+- Voice Kit display name, human-led positioning and concise listing copy.
+- Discovery keywords for plain English, writing style, email and social posts.
+
 ## 0.1.1 (2026-10-05)
 
 - Portable local and hosted onboarding, downloadable or copyable guides, and explicit reuse across chats.
