@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "voice-kit",
-  "version": "0.1.2",
-  "description": "Human-led writing in your own voice. Turn your writing and feedback into a reusable voice guide for clear posts, emails and messages.",
+  "version": "0.1.3",
+  "description": "A writing and editing assistant for posts, emails and messages. Build a reusable voice guide from your own writing, then edit in plain English while keeping your style.",
   "author": {
     "name": "b1rdmania",
     "url": "https://github.com/b1rdmania"
@@ -28,14 +28,20 @@
         "shortDescription": "Human-led writing, your voice",
         "developerName": "b1rdmania",
         "category": "Productivity",
-        "longDescription": "You bring the ideas. Voice Kit helps you put them into words that sound like you.\n\nBuild a reusable voice guide from your writing and the feedback you have given AI. Draft LinkedIn posts, emails and messages with plain-English editing that respects your style. Your preferences lead; you choose the final words.\n\nStart with writing samples, an uploaded export or accessible local AI history. Save your guide to use again. Redaction is best effort, and your AI provider processes the material you supply. The plugin cannot automatically read past chats.",
+        "longDescription": "Voice Kit is a writing and editing assistant for posts, emails and messages. It helps you turn your ideas into clear text in your own voice.\n\nBuild a reusable voice guide from your writing and the feedback you have given AI. Draft LinkedIn posts, emails and messages with plain-English editing that respects your style. Your preferences lead; you choose the final words.\n\nStart with selected writing samples, an uploaded export or accessible local AI history. Save your guide to use again. Redaction is best effort, and your AI provider processes the material you supply. The plugin cannot automatically read past chats.",
         "defaultPrompt": [
           "Learn my writing style from these samples.",
           "Edit this in plain English while keeping my voice.",
           "Use my voice guide to draft a LinkedIn post from these notes."
         ],
         "logo": "./assets/icon.svg",
-        "composerIcon": "./assets/icon.svg"
+        "composerIcon": "./assets/icon.svg",
+        "privacyPolicyURL": "https://gist.github.com/b1rdmania/8b4e9569e08e7c3b23e8e4f9a7ee53bc",
+        "capabilities": [
+          "Build a personal writing guide",
+          "Draft posts, emails and messages",
+          "Edit text in plain English"
+        ]
       }
     }
   }

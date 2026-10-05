@@ -6,7 +6,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 ROOT = Path(__file__).resolve().parents[1]
 FILES = (
-    'plugin.json', 'README.md', 'LICENSE', 'CHANGELOG.md',
+    'plugin.json', 'README.md', 'LICENSE', 'CHANGELOG.md', 'PRIVACY.md',
     'assets/icon.svg', 'examples/guide-example.md',
     'skills/voice-kit/SKILL.md',
     'skills/voice-kit/prompts/analysis.md',

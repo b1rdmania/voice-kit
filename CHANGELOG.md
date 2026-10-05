@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3 (2026-10-05)
+
+- Public privacy policy linked in the listing and included in the package.
+- Explicit writing and editing purpose and capabilities for the Productivity listing.
+
 ## 0.1.2 (2026-10-05)
 
 - Voice Kit display name, human-led positioning and concise listing copy.

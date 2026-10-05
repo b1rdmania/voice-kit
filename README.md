@@ -63,6 +63,8 @@ For local Codex or Claude Code use, the chosen history is extracted on your mach
 
 ## Privacy
 
+Read the [Voice Kit privacy policy](https://gist.github.com/b1rdmania/8b4e9569e08e7c3b23e8e4f9a7ee53bc).
+
 **Storage depends on the host.** Local execution writes to `~/voice/`. Web use processes files you upload in the host’s session storage. Uploading an export already shares it with that provider before redaction. The scripts do not send files to any service.
 
 **Best-effort redaction.** Before analysis, the script:
