@@ -1,6 +1,8 @@
 # Message to a friend
 
-1. The fact and the ask first: where, when, "you about?".
-2. One throwaway line if there is a joke. No setup.
+Follow the guide's "Messages to friends" section. Where it is silent, these are the defaults:
 
-Under about 40 words. "A couple of paragraphs" means two very short ones. No pleasantries. Use the typed register from the guide.
+1. The plan and the ask early.
+2. A joke only if the person's own messages use them.
+
+Length and warmth come from their own messages to friends, not from a word count.

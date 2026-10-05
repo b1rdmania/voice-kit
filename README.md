@@ -22,7 +22,7 @@ flowchart LR
 
 | Ask | Output |
 | --- | --- |
-| "Build my voice" | A voice guide: your registers, how your posts sound, your humour, and hard bans taken from your own corrections |
+| "Build my voice" | A voice guide: your registers, how your posts sound, your humour, rules you have stated, and tendencies from one-off edits |
 | "Write an X post about this" | A draft that keeps your words, cut to half the length, checked against your bans |
 | "Message my friend about tonight" | A short message in the way you actually text |
 | "Refresh my voice" | The guide updated with what you have written since the last build |
@@ -53,16 +53,18 @@ codex plugin marketplace add b1rdmania/voice-kit
 
 ## Privacy
 
-Everything stays on your machine, in `~/voice/`. Before anything is analysed, the extract script:
+**Local extraction and storage.** The extract script runs on your machine and writes to `~/voice/`. Nothing is uploaded by voice-kit itself.
 
-- keeps only your own messages, and drops pastes and tool output
-- drops whole messages about health, money, legal or ID matters
+**Best-effort redaction.** Before analysis, the script:
+
+- keeps only your own messages, plus the first 300 characters of the AI reply each one answered
+- drops pastes, tool output, and messages that mention health, money, legal or ID matters
 - replaces secrets, emails, URLs, handles, phone numbers, card and bank numbers, ID numbers, postcodes, street addresses, IP addresses and usernames in file paths with labels such as `[email]`
-- replaces names of people, places and companies with `[name]`, automatically
+- replaces capitalised names of people, places and companies with `[name]`
 
-You do not need to review anything. The guide is built from how you write, not who you write about.
+This is pattern matching, not a guarantee. Names written in lowercase, and sensitive subjects that avoid the keywords, can get through. Look at `~/voice/corpus.jsonl` before a build if your history holds anything you would not want an AI provider to read.
 
-Your AI host reads the cleaned corpus to analyse it, under that host's own privacy terms. Never commit `~/voice/`.
+**Analysis by your AI provider.** The cleaned corpus is read by the AI host you run voice-kit in (Claude, ChatGPT or Codex), under that provider's terms. Never commit `~/voice/`.
 
 ## Works with plain-english
 

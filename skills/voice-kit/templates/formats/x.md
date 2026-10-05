@@ -8,4 +8,4 @@
 
 ## Rules
 
-Use the guide's capitalisation for X. Short paragraphs. Lists use dashes. One emoji at most. No threads unless the person asks. No hashtags.
+Use the guide's capitalisation, emoji, thread and hashtag habits for X. Defaults, if the guide is silent: short paragraphs, dash lists, at most one emoji, no threads unless asked, no hashtags.

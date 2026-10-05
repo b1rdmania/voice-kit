@@ -20,7 +20,10 @@ phone numbers, card and bank numbers, ID numbers, postcodes, street addresses,
 IP addresses and usernames in file paths. Replaces every capitalised word used
 mid-sentence anywhere in the corpus, wherever it appears, with [name]: people,
 places and companies all go. Voice lives in structure, not names.
-Writes one JSON object per line: {"t": date, "source": ..., "text": ...}.
+Each message keeps the first 300 characters of the AI reply it answered, as
+"reply_to", so a correction can be read in context. Pure acknowledgements
+("ok", "yes", "do it") are dropped; short corrections ("too long") are kept.
+Writes one JSON object per line: {"t", "source", "text", "reply_to"}.
 
 The corpus is private. Keep it in ~/voice/ and never commit or share it.
 """
@@ -32,6 +35,8 @@ import os
 import re
 import sys
 
+ACKS = {"ok", "okay", "k", "yes", "yeah", "yep", "y", "no", "cool", "thanks", "thank you", "ty",
+        "sure", "go", "do it", "go ahead", "nice", "great", "perfect", "lol", "done", "next"}
 MAX_CHARS = 2500  # longer messages are almost always pastes
 SKIP_PREFIXES = ("<", "Base directory for this skill", "[Request interrupted",
                  "Caveat:", "This session is being continued", "[SYSTEM")
@@ -105,6 +110,8 @@ def hide_names(rows, names):
     pattern = re.compile(r"\b(" + "|".join(re.escape(n) for n in sorted(names, key=len, reverse=True)) + r")\b")
     for r in rows:
         r["text"] = pattern.sub("[name]", r["text"])
+        if "reply_to" in r:
+            r["reply_to"] = pattern.sub("[name]", r["reply_to"])
 
 
 def text_of(content, kinds=("text", "input_text")):
@@ -118,48 +125,72 @@ def text_of(content, kinds=("text", "input_text")):
     return ""
 
 
+CONTEXT_CHARS = 300  # how much of the AI's previous reply to keep with each message
+
+
 def claude_code(_path):
     for f in glob.glob(os.path.expanduser("~/.claude/projects/**/*.jsonl"), recursive=True):
         if "/subagents/" in f:
             continue
+        last_reply = ""
         for line in open(f, errors="ignore"):
             try:
                 d = json.loads(line)
             except ValueError:
                 continue
-            if d.get("type") != "user" or d.get("isSidechain") or d.get("isMeta"):
+            if d.get("isSidechain"):
                 continue
-            yield d.get("timestamp", "")[:10], text_of(d.get("message", {}).get("content"))
+            if d.get("type") == "assistant":
+                text = text_of(d.get("message", {}).get("content"))
+                if text.strip():
+                    last_reply = text
+                continue
+            if d.get("type") != "user" or d.get("isMeta"):
+                continue
+            yield d.get("timestamp", "")[:10], text_of(d.get("message", {}).get("content")), last_reply
 
 
 def codex(_path):
     for f in glob.glob(os.path.expanduser("~/.codex/sessions/**/*.jsonl"), recursive=True):
+        last_reply = ""
         for line in open(f, errors="ignore"):
             try:
                 d = json.loads(line)
             except ValueError:
                 continue
             p = d.get("payload", {})
-            if d.get("type") == "response_item" and p.get("type") == "message" and p.get("role") == "user":
-                yield d.get("timestamp", "")[:10], text_of(p.get("content"))
+            if d.get("type") != "response_item" or p.get("type") != "message":
+                continue
+            if p.get("role") == "assistant":
+                text = text_of(p.get("content"), kinds=("output_text", "text"))
+                if text.strip():
+                    last_reply = text
+            elif p.get("role") == "user":
+                yield d.get("timestamp", "")[:10], text_of(p.get("content")), last_reply
 
 
 def chatgpt(path):
     import datetime
+
+    def parts_of(m):
+        return " ".join(p for p in ((m.get("content") or {}).get("parts") or []) if isinstance(p, str))
+
     for conv in json.load(open(path)):
-        for node in conv.get("mapping", {}).values():
+        mapping = conv.get("mapping", {})
+        for node in mapping.values():
             m = node.get("message") or {}
             if (m.get("author") or {}).get("role") != "user":
                 continue
-            parts = (m.get("content") or {}).get("parts") or []
+            parent = (mapping.get(node.get("parent")) or {}).get("message") or {}
+            reply = parts_of(parent) if (parent.get("author") or {}).get("role") == "assistant" else ""
             ts = m.get("create_time")
             date = datetime.date.fromtimestamp(ts).isoformat() if ts else ""
-            yield date, " ".join(p for p in parts if isinstance(p, str))
+            yield date, parts_of(m), reply
 
 
 def samples(path):
     for block in re.split(r"\n\s*\n", open(path).read()):
-        yield "", block
+        yield "", block, ""
 
 
 SOURCES = {"claude-code": claude_code, "codex": codex, "chatgpt": chatgpt, "samples": samples}
@@ -176,21 +207,28 @@ def main():
         sys.exit(f"--source {a.source} needs --path")
 
     seen, rows, dropped = set(), [], 0
-    for date, raw in SOURCES[a.source](a.path):
+    for date, raw, reply in SOURCES[a.source](a.path):
         raw = raw or ""
+        if a.since and date and date < a.since:
+            continue
         if SENSITIVE.search(raw):
             dropped += 1
             continue
         text = clean(raw)
-        if len(text) < 12 or len(text) > MAX_CHARS or text.startswith(SKIP_PREFIXES):
+        # Short messages stay: "too long" and "no colons" are the best evidence.
+        if len(text) < 3 or len(text) > MAX_CHARS or text.startswith(SKIP_PREFIXES):
             continue
-        if a.since and date and date < a.since:
+        if re.sub(r"[^a-z ]", "", text.lower()).strip() in ACKS:
             continue
         key = text[:200]
         if key in seen:
             continue
         seen.add(key)
-        rows.append({"t": date, "source": a.source, "text": text})
+        row = {"t": date, "source": a.source, "text": text}
+        context = "" if SENSITIVE.search(reply or "") else clean(reply or "")[:CONTEXT_CHARS]
+        if context:
+            row["reply_to"] = context
+        rows.append(row)
 
     rows.sort(key=lambda r: r["t"])
     hide_names(rows, find_names(rows))

@@ -20,7 +20,7 @@ def main():
     chunks, current, count = [], [], 0
     for r in rows:
         current.append(r)
-        count += len(r["text"].split())
+        count += len(r["text"].split()) + len(r.get("reply_to", "").split())
         if count >= a.words:
             chunks.append(current)
             current, count = [], 0
@@ -29,7 +29,7 @@ def main():
     folder = os.path.dirname(path)
     for n, chunk in enumerate(chunks, 1):
         with open(os.path.join(folder, f"chunk{n}.txt"), "w") as o:
-            o.write("\n".join(f"[{r['t']}] {r['text']}" for r in chunk))
+            o.write("\n".join(f"[{r['t']}] {r['text']}" + (f"  (replying to: {r['reply_to']})" if r.get("reply_to") else "") for r in chunk))
         print(f"chunk{n}.txt: {chunk[0]['t']} to {chunk[-1]['t']}, {len(chunk)} messages")
 
 

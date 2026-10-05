@@ -1,11 +1,11 @@
 ---
 name: voice-kit
-description: Build a voice guide from the messages a person has already typed to their AI tools, then draft posts and messages that sound like them. The guide's bans come from the person's own corrections ("too long", "that's slop", "no colons"), not a questionnaire. Use when the user says "build my voice", "learn how I write", "write this in my voice", "draft an X post", "draft a LinkedIn post", "make this sound like me", "this sounds like AI", "message my friend", or "refresh my voice guide". Reads Claude Code and Codex history on the user's machine, or a ChatGPT export, or pasted samples. Everything stays local.
+description: Build a voice guide from the messages a person has already typed to their AI tools, then draft posts and messages that sound like them. The guide's bans come from the person's own corrections ("too long", "that's slop", "no colons"), not a questionnaire. Use when the user says "build my voice", "learn how I write", "write this in my voice", "draft an X post", "draft a LinkedIn post", "make this sound like me", "this sounds like AI", "message my friend", or "refresh my voice guide". Reads Claude Code and Codex history on the user's machine, or a ChatGPT export, or pasted samples. Extraction and storage are local; the AI host the user already uses does the analysis.
 ---
 
 # voice-kit
 
-You build and use a person's voice guide. Your job when drafting is to render their words, not to write your own. The person states the thing. You keep their words, cut the filler, and stop.
+You build and use a person's voice guide. Your job when drafting is to render their words, not to write your own. The person's guide and approved drafts decide how it sounds. Your own taste does not.
 
 ## Before you start
 

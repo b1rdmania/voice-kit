@@ -1,6 +1,6 @@
 # Detox core
 
-A short fallback for when the `plain-english` skill is not installed. Flag each item, then keep it only if the guide's "Keep anyway" table gives a reason.
+A short fallback for when the `plain-english` skill is not installed. Flag each item, then keep it if the guide's "Keep anyway" table gives a reason, or if the person's own writing does it on purpose.
 
 1. **Banned words.** delve, tapestry, navigate, leverage, landscape, ecosystem, realm, foster, underscore, robust, comprehensive, nuanced, crucial, pivotal, holistic, seamless, unlock. Use the plain word or cut it.
 2. **Em dashes.** None, unless the guide allows them.

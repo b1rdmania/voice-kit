@@ -1,7 +1,9 @@
 # Email
 
-1. The point or the ask in the first line.
-2. The context they need, in two or three short lines.
+Follow the guide's outbound register and their approved emails. Where those are silent, these are the defaults:
+
+1. The point or the ask near the top.
+2. The context the reader needs.
 3. The next step, with a date if there is one.
 
-Use the outbound register from the guide. No "hope you're well" opener unless the guide shows they use it. Sign off the way their approved examples do.
+Use their own greeting and sign-off. If they open with pleasantries, keep them.

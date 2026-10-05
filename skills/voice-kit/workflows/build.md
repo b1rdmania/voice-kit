@@ -35,7 +35,7 @@ Ask once whether they have posts or messages they were happy with. If they share
 
 Copy `templates/voice-guide.md` to `~/voice/guide.md`. Fill every section from the findings and the approved examples.
 
-- Every hard ban must come from a correction the person actually gave. Quote it.
+- Every hard ban must come from a standing correction: a general rule the person stated, or the same correction on two or more drafts. Quote it. One-off edits go under "Tendencies".
 - Every "keep anyway" item must show up in their own writing.
 - Leave a section empty, with a note, rather than invent it.
 

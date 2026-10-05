@@ -37,7 +37,13 @@ Modest or blunt? Numbers or adjectives? Two short examples.
 
 ## Hard bans
 
-Every item comes from a correction they gave. Quote the correction.
+Only standing corrections: stated as a general rule, or repeated on two or more different drafts. Quote the correction and say which.
+
+- 
+
+## Tendencies
+
+One-off edits that point the same way but are not rules. Use them as defaults, not bans.
 
 - 
 

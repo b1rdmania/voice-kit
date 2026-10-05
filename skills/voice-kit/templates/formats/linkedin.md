@@ -8,4 +8,4 @@
 
 ## Rules
 
-The first two lines must work alone, because that is all that shows before "see more". No listicles. No "what do you think?" ending.
+The first two lines must work alone, because that is all that shows before "see more". Lists, questions at the end and length follow the person's approved posts. Default, if there are none: no listicle, no "what do you think?" ending.
